@@ -219,7 +219,8 @@
       text-transform: uppercase;
       margin-bottom: 20px;
       color: #000;
-      white-space: nowrap;
+      /* Alterado para permitir quebra de linha */
+      white-space: normal;
       font-size: 24px;
     }
     .field-container {
@@ -257,7 +258,7 @@
       color: red;
       display: none;
     }
-    /* Botão do formulário de identificação no primeiro container: posicionado no canto inferior direito */
+    /* Botão do formulário de identificação no primeiro container */
     #homeContainer .identification-container {
       position: relative;
     }
@@ -342,22 +343,21 @@
   <div class="container" id="homeContainer">
     <div class="identification-container">
       <!-- Título da Primeira Página -->
- 
+      <h1>Teste suas habilidades de Dono de Restaurantes</h1>
       <form id="identification-form">
         <!-- Campo 1: Nome -->
         <div class="field-container">
-     <h1>Teste suas habilidades de Dono de Restaurantes</h1>
           <label for="nome">Nome e sobrenome:</label>
           <input type="text" id="nome" name="nome"
                  pattern="^[a-zA-ZÀ-ÖØ-öø-ÿ]+(?:\s+[a-zA-ZÀ-ÖØ-öø-ÿ]+)+$"
                  title="Digite seu nome completo, contendo ao menos dois nomes."
                  required>
-          <small class="helper-text">* Insira seu nome completo (ao menos dois nomes).</small>
+          <small class="helper-text">* Insira seu nome completo ou ao menos nome e sobrenome.</small>
           <small class="error-text">Por favor, insira um nome válido contendo ao menos dois nomes.</small>
         </div>
-        <!-- Campo 2: Nome do Restaurante -->
+        <!-- Campo 2: Nome do restaurante -->
         <div class="field-container">
-          <label for="restaurante">Nome do Restaurante:</label>
+          <label for="restaurante">Nome do restaurante:</label>
           <input type="text" id="restaurante" name="restaurante"
                  pattern='^[a-zA-ZÀ-ÖØ-öø-ÿ0-9!@#$%^&*(),.?"&#39;:{}|<>]+(?:\s+[a-zA-ZÀ-ÖØ-öø-ÿ0-9!@#$%^&*(),.?"&#39;:{}|<>]+)*$'
                  title="Digite o nome do seu restaurante. Deve conter ao menos um nome, permitindo letras, números e caracteres especiais."
