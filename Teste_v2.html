@@ -263,22 +263,54 @@
     }
     /* Moldura com os dados do usuário (no container de resultados) */
     .user-header {
-      background-color: #f2f2f2; /* cinza claro */
-      border: 1px solid #999999; /* contorno cinza mais escuro */
+      background-color: #f2f2f2;
+      border: 1px solid #999999;
       border-radius: 8px;
       padding: 20px;
       margin-bottom: 20px;
       text-transform: uppercase;
       font-weight: bold;
     }
+
+    /* ===================== CSS PARA IMPRESSÃO ===================== */
+    @media print {
+      /* Exibe somente o container de resultados */
+      body * {
+        visibility: hidden;
+      }
+      #resultContainer, #resultContainer * {
+        visibility: visible;
+      }
+      #resultContainer {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+      }
+      
+      /* Oculta os botões */
+      .button-container {
+        display: none !important;
+      }
+      
+      /* Força a quebra de página antes do início da SWOT (segunda página) */
+      .page-break {
+        page-break-before: always;
+      }
+      
+      /* Configura a página para A4 */
+      @page {
+        size: A4;
+        margin: 20mm;
+      }
+    }
+    /* ===================== FIM CSS PARA IMPRESSÃO ===================== */
   </style>
 </head>
 <body>
   <!-- Página Inicial (Primeira Página) -->
   <div class="container" id="homeContainer">
-    <h1>Bem-vindo ao Teste de Habilidades de Dono de Restaurante</h1>
-    <p>Descubra como está o desempenho do seu restaurante em diversas áreas por meio deste teste rápido e intuitivo.</p>
-    <!-- Container de Identificação do Usuário -->
+       <!-- Container de Identificação do Usuário -->
     <div class="identification-container">
       <h1>Teste suas habilidades de Dono de Restaurantes</h1>
       <form id="identification-form">
@@ -321,7 +353,7 @@
                  required>
           <small class="helper-text">* Insira seu número de telefone (DDD + Número) sem espaços ou caracteres adicionais.</small>
           <small class="error-text">Por favor, insira um número de telefone válido.</small>
-        </div>
+        </div><BR><BR>
         <!-- Botão Iniciar Teste (posicionado no canto inferior direito da moldura) -->
         <div class="button-container">
           <button type="submit" id="startQuiz" class="advance-button">Iniciar Teste</button>
@@ -554,6 +586,8 @@
     </p>
     <h1>DESEMPENHO POR PILAR DE GESTÃO</h1>
     <canvas id="chartCanvas"></canvas>
+    <!-- A seguir, serão inseridos via JavaScript a SWOT e as Ações Recomendadas.
+         A SWOT terá a classe "page-break" para forçar que inicie em uma nova página na impressão -->
     <div class="button-container">
       <button id="backButton">Voltar para o Questionário</button>
       <button id="generatePdf"><i class="fas fa-print"></i> Imprimir</button>
@@ -639,7 +673,7 @@
     document.getElementById('quizForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
-      // --- Criação do Cabeçalho com Dados do Usuário ---
+      // --- Criação do Cabeçalho com Dados do Usuário ---  
       const resultHeader = document.getElementById('resultHeader');
       // Limpa qualquer informação anterior (caso o usuário refaça o teste)
       resultHeader.querySelectorAll('.user-header').forEach(el => el.remove());
@@ -801,7 +835,8 @@
       }
       
       let swotContainer = document.createElement('div');
-      swotContainer.className = "swot-container";
+      // Adiciona a classe "page-break" para que este container inicie em uma nova página na impressão
+      swotContainer.className = "swot-container page-break";
       
       let pontosFortesDiv = document.createElement('div');
       pontosFortesDiv.className = "quadrant pontos-fortes";
