@@ -31,7 +31,7 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.1);
       position: relative;
     }
-    /* Responsividade para mobile */
+    /* Responsividade para dispositivos móveis */
     @media (max-width: 768px) {
       .container {
         padding: 15px;
@@ -124,6 +124,7 @@
       width: 100%;
       border-collapse: collapse;
       margin-top: 10px;
+      overflow-x: auto;
     }
     table, th, td {
       border: 1px solid #ddd;
@@ -134,6 +135,8 @@
     }
     canvas {
       margin-top: 20px;
+      max-width: 100%;
+      height: auto;
     }
     /* Estilos para a matriz SWOT */
     .swot-container {
@@ -276,14 +279,27 @@
     .advance-button:hover {
       background-color: #0056b3;
     }
-    /* Cabeçalho do relatório de avaliação (no container de resultados) */
+    /* Botão de envio do questionário (Container 2) */
+    .submit-btn {
+      padding: 10px 20px;
+      background-color: #007BFF;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    .submit-btn:hover {
+      background-color: #0056b3;
+    }
+    /* Cabeçalho do relatório de avaliação (Container 3) */
     .report-title {
       font-size: 32px;
       font-weight: bold;
       text-align: left;
       margin-bottom: 10px;
     }
-    /* Moldura com os dados do usuário (no container de resultados) */
+    /* Moldura com os dados do usuário (Container 3) */
     .user-header {
       background-color: #f2f2f2;
       border: 1px solid #999999;
@@ -293,10 +309,9 @@
       text-transform: uppercase;
       font-weight: bold;
     }
-
-    /* ===================== CSS PARA IMPRESSÃO ===================== */
+    
+    /* CSS para Impressão */
     @media print {
-      /* Exibe somente o container de resultados */
       body * {
         visibility: hidden;
       }
@@ -309,24 +324,17 @@
         top: 0;
         width: 100%;
       }
-      
-      /* Oculta os botões */
       .button-container {
         display: none !important;
       }
-      
-      /* Força a quebra de página antes do início da SWOT (segunda página) */
       .page-break {
         page-break-before: always;
       }
-      
-      /* Configura a página para A4 */
       @page {
         size: A4;
         margin: 20mm;
       }
     }
-    /* ===================== FIM CSS PARA IMPRESSÃO ===================== */
   </style>
 </head>
 <body>
@@ -385,7 +393,7 @@
     </div>
   </div>
 
-  <!-- Container 2: Questionário com Todas as 24 Questões -->
+  <!-- Container 2: Questionário Completo -->
   <div class="container" id="quizContainer">
     <h1>TESTE SUAS HABILIDADES DE DONO DE RESTAURANTE</h1>
     <br>
@@ -411,194 +419,196 @@
         <h2>Questão 3</h2>
         <p>Como você avalia o posicionamento do seu restaurante no mercado?</p>
         <label><input type="radio" name="q3" value="0.63-A-Estratégia" required> A. Ruim. Não tenho um público bem definido e nem clareza quanto ao meu diferencial de mercado.</label>
-        <label><input type="radio" name="q3" value="1.25-B-Estratégia"> B. Razoável. Faço diferentes estratégias para atingir vários públicos e acredito que meus diferenciais de mercado precisam ser melhor trabalhados.</label>
-        <label><input type="radio" name="q3" value="1.88-C-Estratégia"> C. Bom. Sei quem é meu público e acredito que ele enxerga os meus diferenciais.</label>
-        <label><input type="radio" name="q3" value="2.5-D-Estratégia"> D. Ótimo! Possuo um posicionamento claro, com estratégias bem definidas para o meu público.</label>
+        <label><input type="radio" name="q3" value="1.25-B-Estratégia"> B. Razoável. Faço estratégias para atingir diversos públicos, mas meus diferenciais ainda precisam ser trabalhados.</label>
+        <label><input type="radio" name="q3" value="1.88-C-Estratégia"> C. Bom. Tenho clareza do meu público e meus diferenciais são reconhecidos.</label>
+        <label><input type="radio" name="q3" value="2.5-D-Estratégia"> D. Ótimo! Possuo um posicionamento claro e estratégias bem definidas.</label>
       </div>
       <div class="question">
         <h2>Questão 4</h2>
         <p>Qual é o seu nível de clareza quanto à estratégia de expansão do seu restaurante?</p>
         <label><input type="radio" name="q4" value="0.63-A-Estratégia" required> A. Não tenho uma estratégia de expansão.</label>
-        <label><input type="radio" name="q4" value="1.25-B-Estratégia"> B. Considero a expansão, mas não tenho clareza quanto a qual modelo de expansão seguir.</label>
-        <label><input type="radio" name="q4" value="1.88-C-Estratégia"> C. Tenho planos de expansão do meu restaurante, mas eles não estão formalizados.</label>
-        <label><input type="radio" name="q4" value="2.5-D-Estratégia"> D. Tenho uma estratégia clara de expansão com metas e prazos bem definidos.</label>
+        <label><input type="radio" name="q4" value="1.25-B-Estratégia"> B. Considero a expansão, mas não sei qual modelo seguir.</label>
+        <label><input type="radio" name="q4" value="1.88-C-Estratégia"> C. Tenho planos de expansão, mas sem formalização.</label>
+        <label><input type="radio" name="q4" value="2.5-D-Estratégia"> D. Tenho uma estratégia clara com metas e prazos definidos.</label>
       </div>
       <!-- Processos (Questões 5 a 8) -->
       <div class="question">
         <h2>Questão 5</h2>
         <p>Como você avalia os Procedimentos Operacionais Padrão (POPs) no seu restaurante?</p>
-        <label><input type="radio" name="q5" value="0.63-A-Processos" required> A. Não formalizei os procedimentos operacionais, ensino a equipe de forma prática.</label>
-        <label><input type="radio" name="q5" value="1.25-B-Processos"> B. Alguns procedimentos estão definidos, mas não são seguidos por todos.</label>
-        <label><input type="radio" name="q5" value="1.88-C-Processos"> C. Já formalizei os procedimentos, mas há dificuldades em manter a adesão constante.</label>
-        <label><input type="radio" name="q5" value="2.5-D-Processos"> D. A maioria dos procedimentos está bem documentada e funciona de forma consistente.</label>
+        <label><input type="radio" name="q5" value="0.63-A-Processos" required> A. Não formalizei os procedimentos; ensino de forma prática.</label>
+        <label><input type="radio" name="q5" value="1.25-B-Processos"> B. Alguns procedimentos existem, mas não são seguidos por todos.</label>
+        <label><input type="radio" name="q5" value="1.88-C-Processos"> C. Formalizei os procedimentos, mas a adesão ainda é variável.</label>
+        <label><input type="radio" name="q5" value="2.5-D-Processos"> D. A maioria dos procedimentos está bem documentada e é seguida de forma consistente.</label>
       </div>
       <div class="question">
         <h2>Questão 6</h2>
         <p>Como você realiza o controle de estoque no seu restaurante?</p>
-        <label><input type="radio" name="q6" value="0.63-A-Processos" required> A. O controle de estoque é realizado manualmente e revisado com pouca frequência.</label>
-        <label><input type="radio" name="q6" value="1.25-B-Processos"> B. Faço o controle de estoque manualmente, mas reviso semanalmente.</label>
-        <label><input type="radio" name="q6" value="1.88-C-Processos"> C. Utilizo um sistema digital para controlar o estoque, mas não reviso com a frequência que gostaria.</label>
-        <label><input type="radio" name="q6" value="2.5-D-Processos"> D. O controle de estoque é feito com ferramentas digitais, facilitando o acompanhamento.</label>
+        <label><input type="radio" name="q6" value="0.63-A-Processos" required> A. Controle manual com revisões esporádicas.</label>
+        <label><input type="radio" name="q6" value="1.25-B-Processos"> B. Manual, porém revisado semanalmente.</label>
+        <label><input type="radio" name="q6" value="1.88-C-Processos"> C. Uso um sistema digital, mas com revisões pouco frequentes.</label>
+        <label><input type="radio" name="q6" value="2.5-D-Processos"> D. Sistema digital com acompanhamento constante.</label>
       </div>
       <div class="question">
         <h2>Questão 7</h2>
         <p>Como você garante a padronização dos pratos no seu restaurante?</p>
-        <label><input type="radio" name="q7" value="0.63-A-Processos" required> A. Não tenho um processo formal para padronizar os pratos.</label>
-        <label><input type="radio" name="q7" value="1.25-B-Processos"> B. Tenho fichas técnicas para alguns pratos, mas nem todos os preparos seguem o padrão.</label>
-        <label><input type="radio" name="q7" value="1.88-C-Processos"> C. As fichas técnicas são usadas para a maioria dos pratos, mas ainda há ajustes a fazer.</label>
-        <label><input type="radio" name="q7" value="2.5-D-Processos"> D. Utilizo fichas técnicas e a equipe está treinada para seguir as orientações no preparo.</label>
+        <label><input type="radio" name="q7" value="0.63-A-Processos" required> A. Não tenho um processo formal de padronização.</label>
+        <label><input type="radio" name="q7" value="1.25-B-Processos"> B. Uso fichas técnicas para alguns pratos, mas nem todos seguem o padrão.</label>
+        <label><input type="radio" name="q7" value="1.88-C-Processos"> C. A maioria dos pratos utiliza fichas técnicas, mas ajustes ainda são necessários.</label>
+        <label><input type="radio" name="q7" value="2.5-D-Processos"> D. Uso fichas técnicas e a equipe segue rigorosamente as orientações.</label>
       </div>
       <div class="question">
         <h2>Questão 8</h2>
         <p>Como está organizado o fluxo de trabalho na cozinha?</p>
-        <label><input type="radio" name="q8" value="0.63-A-Processos" required> A. Não há uma organização clara e ocorrem atrasos frequentes.</label>
-        <label><input type="radio" name="q8" value="1.25-B-Processos"> B. O fluxo é organizado, mas ainda ocorrem sobrecargas em horários de pico.</label>
-        <label><input type="radio" name="q8" value="1.88-C-Processos"> C. O fluxo é bem organizado, com algumas falhas pontuais.</label>
-        <label><input type="radio" name="q8" value="2.5-D-Processos"> D. O fluxo é bem estruturado, sem falhas e a equipe trabalha de forma coordenada.</label>
+        <label><input type="radio" name="q8" value="0.63-A-Processos" required> A. Sem organização clara, com atrasos frequentes.</label>
+        <label><input type="radio" name="q8" value="1.25-B-Processos"> B. Organização existente, mas com sobrecarga em horários de pico.</label>
+        <label><input type="radio" name="q8" value="1.88-C-Processos"> C. Fluxo bem organizado, com pequenas falhas pontuais.</label>
+        <label><input type="radio" name="q8" value="2.5-D-Processos"> D. Fluxo estruturado, sem falhas e com equipe coordenada.</label>
       </div>
       <!-- Vendas (Questões 9 a 12) -->
       <div class="question">
         <h2>Questão 9</h2>
         <p>Como você avalia o volume de vendas atual do seu restaurante?</p>
-        <label><input type="radio" name="q9" value="0.63-A-Vendas" required> A. As vendas estão abaixo do esperado e não estão crescendo.</label>
-        <label><input type="radio" name="q9" value="1.88-B-Vendas"> B. O volume de vendas é razoável, mas oscila ao longo dos meses.</label>
-        <label><input type="radio" name="q9" value="1.25-C-Vendas"> C. O volume de vendas está estável, mas sem aumento significativo.</label>
-        <label><input type="radio" name="q9" value="2.5-D-Vendas"> D. O volume de vendas está superando as metas estabelecidas.</label>
+        <label><input type="radio" name="q9" value="0.63-A-Vendas" required> A. Vendas abaixo do esperado e sem crescimento.</label>
+        <label><input type="radio" name="q9" value="1.88-B-Vendas"> B. Vendas razoáveis, porém com oscilações mensais.</label>
+        <label><input type="radio" name="q9" value="1.25-C-Vendas"> C. Vendas estáveis, mas sem aumento significativo.</label>
+        <label><input type="radio" name="q9" value="2.5-D-Vendas"> D. Vendas superando as metas estabelecidas.</label>
       </div>
       <div class="question">
         <h2>Questão 10</h2>
         <p>Como você avalia a satisfação dos seus clientes após a venda?</p>
-        <label><input type="radio" name="q10" value="0.63-A-Vendas" required> A. Tenho um processo básico para coletar feedback, mas raramente utilizo os dados para ajustes.</label>
-        <label><input type="radio" name="q10" value="1.88-B-Vendas"> B. Pergunto aos clientes ocasionalmente, mas sem um processo formal.</label>
-        <label><input type="radio" name="q10" value="1.25-C-Vendas"> C. Realizo perguntas informais sobre a satisfação dos clientes, mas sem regularidade.</label>
-        <label><input type="radio" name="q10" value="2.5-D-Vendas"> D. Faço pesquisas regulares de satisfação e uso os resultados para ajustes no serviço.</label>
+        <label><input type="radio" name="q10" value="0.63-A-Vendas" required> A. Processo básico de coleta de feedback, raramente utilizado.</label>
+        <label><input type="radio" name="q10" value="1.88-B-Vendas"> B. Coleta feedback ocasionalmente, sem formalidade.</label>
+        <label><input type="radio" name="q10" value="1.25-C-Vendas"> C. Perguntas informais, mas sem regularidade.</label>
+        <label><input type="radio" name="q10" value="2.5-D-Vendas"> D. Pesquisas regulares com uso dos resultados para ajustes.</label>
       </div>
       <div class="question">
         <h2>Questão 11</h2>
         <p>Qual é a meta de vendas estabelecida para o seu restaurante?</p>
-        <label><input type="radio" name="q11" value="0.63-A-Vendas" required> A. Não tenho uma meta de vendas clara.</label>
-        <label><input type="radio" name="q11" value="1.25-B-Vendas"> B. Estabeleço metas, mas acompanho apenas esporadicamente.</label>
-        <label><input type="radio" name="q11" value="1.88-C-Vendas"> C. Minhas metas de vendas são definidas e revisadas periodicamente.</label>
-        <label><input type="radio" name="q11" value="2.5-D-Vendas"> D. Defino metas claras e monitoro o desempenho com frequência, ajustando conforme necessário.</label>
+        <label><input type="radio" name="q11" value="0.63-A-Vendas" required> A. Não tenho meta definida.</label>
+        <label><input type="radio" name="q11" value="1.25-B-Vendas"> B. Metas definidas, mas acompanhadas esporadicamente.</label>
+        <label><input type="radio" name="q11" value="1.88-C-Vendas"> C. Metas definidas e revisadas periodicamente.</label>
+        <label><input type="radio" name="q11" value="2.5-D-Vendas"> D. Metas claras com monitoramento frequente e ajustes necessários.</label>
       </div>
       <div class="question">
         <h2>Questão 12</h2>
-        <p>Você utiliza técnicas de upsell (oferecer itens de maior valor) e cross-sell (sugerir itens complementares) no seu restaurante?</p>
-        <label><input type="radio" name="q12" value="0.63-A-Vendas" required> A. Nunca utilizo técnicas de upsell ou cross-sell.</label>
-        <label><input type="radio" name="q12" value="1.25-B-Vendas"> B. Conheço essas técnicas, mas quase nunca as coloco em prática.</label>
-        <label><input type="radio" name="q12" value="1.88-C-Vendas"> C. Aplico essas técnicas de vez em quando, mas sem regularidade.</label>
-        <label><input type="radio" name="q12" value="2.5-D-Vendas"> D. Utilizo regularmente upsell e cross-sell, aumentando o ticket médio dos pedidos.</label>
+        <p>Você utiliza técnicas de upsell e cross-sell no seu restaurante?</p>
+        <label><input type="radio" name="q12" value="0.63-A-Vendas" required> A. Nunca utilizo essas técnicas.</label>
+        <label><input type="radio" name="q12" value="1.25-B-Vendas"> B. Conheço, mas raramente as aplico.</label>
+        <label><input type="radio" name="q12" value="1.88-C-Vendas"> C. Uso ocasionalmente, sem regularidade.</label>
+        <label><input type="radio" name="q12" value="2.5-D-Vendas"> D. Uso regularmente, aumentando o ticket médio.</label>
       </div>
       <!-- Marketing (Questões 13 a 16) -->
       <div class="question">
         <h2>Questão 13</h2>
         <p>Como você avalia as campanhas de marketing do seu restaurante?</p>
-        <label><input type="radio" name="q13" value="0.63-A-Marketing" required> A. Não faço campanhas de marketing estruturadas.</label>
-        <label><input type="radio" name="q13" value="1.25-B-Marketing"> B. Realizo campanhas pontuais, mas sem uma estratégia clara de acompanhamento.</label>
-        <label><input type="radio" name="q13" value="1.88-C-Marketing"> C. Realizo campanhas de marketing com objetivos claros e acompanho os resultados de forma esporádica.</label>
-        <label><input type="radio" name="q13" value="2.5-D-Marketing"> D. Minhas campanhas de marketing são bem planejadas, têm objetivos claros e os resultados são monitorados regularmente.</label>
+        <label><input type="radio" name="q13" value="0.63-A-Marketing" required> A. Não faço campanhas estruturadas.</label>
+        <label><input type="radio" name="q13" value="1.25-B-Marketing"> B. Campanhas pontuais, sem estratégia clara.</label>
+        <label><input type="radio" name="q13" value="1.88-C-Marketing"> C. Campanhas com objetivos claros, mas com acompanhamento esporádico.</label>
+        <label><input type="radio" name="q13" value="2.5-D-Marketing"> D. Campanhas bem planejadas com monitoramento regular dos resultados.</label>
       </div>
       <div class="question">
         <h2>Questão 14</h2>
         <p>Você já utiliza tráfego pago em suas estratégias de marketing?</p>
-        <label><input type="radio" name="q14" value="0.63-A-Marketing" required> A. Nunca utilizei tráfego pago em minhas campanhas.</label>
-        <label><input type="radio" name="q14" value="1.25-B-Marketing"> B. Já testei tráfego pago, mas não obtive os resultados esperados.</label>
-        <label><input type="radio" name="q14" value="1.88-C-Marketing"> C. Utilizo tráfego pago ocasionalmente, mas ainda estou ajustando para melhorar os resultados.</label>
-        <label><input type="radio" name="q14" value="2.5-D-Marketing"> D. Utilizo tráfego pago regularmente e monitoro os resultados para ajustar as estratégias.</label>
+        <label><input type="radio" name="q14" value="0.63-A-Marketing" required> A. Nunca utilizei tráfego pago.</label>
+        <label><input type="radio" name="q14" value="1.25-B-Marketing"> B. Testei tráfego pago, mas não obtive os resultados esperados.</label>
+        <label><input type="radio" name="q14" value="1.88-C-Marketing"> C. Uso tráfego pago ocasionalmente, ainda ajustando a estratégia.</label>
+        <label><input type="radio" name="q14" value="2.5-D-Marketing"> D. Uso tráfego pago regularmente com monitoramento dos resultados.</label>
       </div>
       <div class="question">
         <h2>Questão 15</h2>
         <p>Como você avalia o posicionamento digital do seu restaurante?</p>
-        <label><input type="radio" name="q15" value="0.63-A-Marketing" required> A. O restaurante tem pouca presença em redes sociais e plataformas digitais.</label>
-        <label><input type="radio" name="q15" value="1.25-B-Marketing"> B. Tenho presença em algumas redes sociais, mas sem uma estratégia clara de comunicação.</label>
-        <label><input type="radio" name="q15" value="1.88-C-Marketing"> C. O restaurante está presente nas principais redes sociais e a comunicação é feita com certa regularidade.</label>
-        <label><input type="radio" name="q15" value="2.5-D-Marketing"> D. O restaurante tem forte presença digital, com comunicação regular e interações frequentes com os clientes.</label>
+        <label><input type="radio" name="q15" value="0.63-A-Marketing" required> A. Pouca presença nas redes sociais.</label>
+        <label><input type="radio" name="q15" value="1.25-B-Marketing"> B. Presença em algumas redes, mas sem estratégia clara.</label>
+        <label><input type="radio" name="q15" value="1.88-C-Marketing"> C. Presença nas principais redes com comunicação regular.</label>
+        <label><input type="radio" name="q15" value="2.5-D-Marketing"> D. Forte presença digital com interações frequentes.</label>
       </div>
       <div class="question">
         <h2>Questão 16</h2>
-        <p>Seu restaurante investe em marketing de influência (parcerias com influenciadores) e como você avalia os resultados?</p>
-        <label><input type="radio" name="q16" value="0.63-A-Marketing" required> A. Não invisto nisso.</label>
-        <label><input type="radio" name="q16" value="1.25-B-Marketing"> B. Penso em investir, mas ainda não implementei essa ação.</label>
-        <label><input type="radio" name="q16" value="1.88-C-Marketing"> C. Fiz algumas parcerias, mas sem resultados claros.</label>
-        <label><input type="radio" name="q16" value="2.5-D-Marketing"> D. Faço parcerias regulares com influenciadores e tenho bons resultados.</label>
+        <p>Seu restaurante investe em marketing de influência? Como você avalia os resultados?</p>
+        <label><input type="radio" name="q16" value="0.63-A-Marketing" required> A. Não invisto nessa área.</label>
+        <label><input type="radio" name="q16" value="1.25-B-Marketing"> B. Penso em investir, mas ainda não implementei.</label>
+        <label><input type="radio" name="q16" value="1.88-C-Marketing"> C. Fiz parcerias, mas sem resultados claros.</label>
+        <label><input type="radio" name="q16" value="2.5-D-Marketing"> D. Parcerias regulares com bons resultados.</label>
       </div>
       <!-- Finanças (Questões 17 a 20) -->
       <div class="question">
         <h2>Questão 17</h2>
         <p>Como você avalia a saúde financeira do seu negócio?</p>
-        <label><input type="radio" name="q17" value="0.63-A-Finanças" required> A. As finanças estão desequilibradas, com dificuldades para cobrir os custos mensais.</label>
-        <label><input type="radio" name="q17" value="1.25-B-Finanças"> B. A saúde financeira é variável, com períodos de sobra e de escassez.</label>
-        <label><input type="radio" name="q17" value="1.88-C-Finanças"> C. As finanças estão estáveis, mas sem grandes sobras para investimentos.</label>
-        <label><input type="radio" name="q17" value="2.5-D-Finanças"> D. Tenho uma boa margem financeira, com lucros que permitem investimentos e expansão.</label>
+        <label><input type="radio" name="q17" value="0.63-A-Finanças" required> A. Finanças desequilibradas, com dificuldades para cobrir custos.</label>
+        <label><input type="radio" name="q17" value="1.25-B-Finanças"> B. Finanças variáveis, com períodos de sobra e escassez.</label>
+        <label><input type="radio" name="q17" value="1.88-C-Finanças"> C. Finanças estáveis, mas sem grande sobra para investimentos.</label>
+        <label><input type="radio" name="q17" value="2.5-D-Finanças"> D. Boa margem financeira que permite investimentos e expansão.</label>
       </div>
       <div class="question">
         <h2>Questão 18</h2>
         <p>Como você faz o controle do Custo de Mercadorias Vendidas (CMV)?</p>
-        <label><input type="radio" name="q18" value="0.63-A-Finanças" required> A. Não faço o controle do CMV de forma estruturada.</label>
-        <label><input type="radio" name="q18" value="1.25-B-Finanças"> B. Faço o controle do CMV de forma esporádica e sem acompanhamento detalhado.</label>
-        <label><input type="radio" name="q18" value="1.88-C-Finanças"> C. Tenho um controle regular do CMV, mas sem integração com outros indicadores.</label>
-        <label><input type="radio" name="q18" value="2.5-D-Finanças"> D. Faço um controle detalhado do CMV e uso os dados para ajustar o preço de venda.</label>
+        <label><input type="radio" name="q18" value="0.63-A-Finanças" required> A. Não faço controle estruturado do CMV.</label>
+        <label><input type="radio" name="q18" value="1.25-B-Finanças"> B. Controle esporádico do CMV, sem acompanhamento detalhado.</label>
+        <label><input type="radio" name="q18" value="1.88-C-Finanças"> C. Controle regular do CMV, porém sem integração completa com outros indicadores.</label>
+        <label><input type="radio" name="q18" value="2.5-D-Finanças"> D. Controle detalhado do CMV, usando os dados para ajustes nos preços.</label>
       </div>
       <div class="question">
         <h2>Questão 19</h2>
         <p>Como você avalia a gestão financeira do seu restaurante?</p>
-        <label><input type="radio" name="q19" value="0.63-A-Finanças" required> A. Não tenho um sistema de controle financeiro e as decisões são feitas de forma intuitiva.</label>
-        <label><input type="radio" name="q19" value="1.25-B-Finanças"> B. Faço o controle financeiro, mas sem o uso de ferramentas formais, como DRE ou fluxo de caixa.</label>
+        <label><input type="radio" name="q19" value="0.63-A-Finanças" required> A. Sem sistema de controle financeiro; decisões intuitivas.</label>
+        <label><input type="radio" name="q19" value="1.25-B-Finanças"> B. Controle financeiro informal, sem ferramentas como DRE.</label>
         <label><input type="radio" name="q19" value="1.88-C-Finanças"> C. Acompanho o fluxo de caixa, mas não utilizo relatórios detalhados.</label>
-        <label><input type="radio" name="q19" value="2.5-D-Finanças"> D. Utilizo fluxo de caixa e DRE regularmente para decisões financeiras.</label>
+        <label><input type="radio" name="q19" value="2.5-D-Finanças"> D. Utilizo fluxo de caixa e DRE regularmente para tomar decisões.</label>
       </div>
       <div class="question">
         <h2>Questão 20</h2>
         <p>Como você acompanha a saúde financeira do seu restaurante?</p>
-        <label><input type="radio" name="q20" value="0.63-A-Finanças" required> A. Não acompanho formalmente; faço avaliações superficiais.</label>
-        <label><input type="radio" name="q20" value="1.25-B-Finanças"> B. Acompanho de forma regular, mas sem todos os indicadores necessários.</label>
-        <label><input type="radio" name="q20" value="1.88-C-Finanças"> C. Acompanho as finanças regularmente com relatórios detalhados como DRE e fluxo de caixa.</label>
-        <label><input type="radio" name="q20" value="2.5-D-Finanças"> D. Acompanho ocasionalmente, mas sem relatórios estruturados.</label>
+        <label><input type="radio" name="q20" value="0.63-A-Finanças" required> A. Avaliação superficial, sem acompanhamento formal.</label>
+        <label><input type="radio" name="q20" value="1.25-B-Finanças"> B. Acompanhamento regular, mas sem todos os indicadores necessários.</label>
+        <label><input type="radio" name="q20" value="1.88-C-Finanças"> C. Uso relatórios detalhados, como DRE e fluxo de caixa, de forma regular.</label>
+        <label><input type="radio" name="q20" value="2.5-D-Finanças"> D. Acompanhamento ocasional, sem estrutura formal.</label>
       </div>
       <!-- Pessoas (Questões 21 a 24) -->
       <div class="question">
         <h2>Questão 21</h2>
         <p>Como está a gestão de pessoas no seu restaurante?</p>
-        <label><input type="radio" name="q21" value="0.63-A-Pessoas" required> A. Não faço reuniões com a equipe.</label>
-        <label><input type="radio" name="q21" value="1.25-B-Pessoas"> B. Faço reuniões esporádicas.</label>
-        <label><input type="radio" name="q21" value="1.88-C-Pessoas"> C. Faço reuniões regulares, mas nem sempre abordo todos os temas.</label>
-        <label><input type="radio" name="q21" value="2.5-D-Pessoas"> D. Faço reuniões periódicas para discutir gestão e desempenho.</label>
+        <label><input type="radio" name="q21" value="0.63-A-Pessoas" required> A. Não realizo reuniões com a equipe.</label>
+        <label><input type="radio" name="q21" value="1.25-B-Pessoas"> B. Reuniões acontecem esporadicamente.</label>
+        <label><input type="radio" name="q21" value="1.88-C-Pessoas"> C. Reuniões regulares, mas com temas incompletos.</label>
+        <label><input type="radio" name="q21" value="2.5-D-Pessoas"> D. Reuniões periódicas com discussão completa de gestão e desempenho.</label>
       </div>
       <div class="question">
         <h2>Questão 22</h2>
         <p>Como você avalia o desempenho da sua equipe?</p>
-        <label><input type="radio" name="q22" value="0.63-A-Pessoas" required> A. Desempenho insatisfatório, muitos pontos a melhorar.</label>
-        <label><input type="radio" name="q22" value="1.25-B-Pessoas"> B. Desempenho razoável, com áreas de melhoria.</label>
-        <label><input type="radio" name="q22" value="1.88-C-Pessoas"> C. A equipe tem desempenho consistente e alinhado às expectativas.</label>
-        <label><input type="radio" name="q22" value="2.5-D-Pessoas"> D. Bom desempenho, mas com necessidade de ajustes.</label>
+        <label><input type="radio" name="q22" value="0.63-A-Pessoas" required> A. Desempenho insatisfatório, com muitos pontos a melhorar.</label>
+        <label><input type="radio" name="q22" value="1.25-B-Pessoas"> B. Desempenho razoável, mas com áreas de melhoria.</label>
+        <label><input type="radio" name="q22" value="1.88-C-Pessoas"> C. Desempenho consistente e alinhado às expectativas.</label>
+        <label><input type="radio" name="q22" value="2.5-D-Pessoas"> D. Bom desempenho, com alguns ajustes necessários.</label>
       </div>
       <div class="question">
         <h2>Questão 23</h2>
         <p>Qual é o nível de rotatividade de colaboradores no seu restaurante?</p>
-        <label><input type="radio" name="q23" value="0.63-A-Pessoas" required> A. Rotatividade alta, muitos colaboradores saem.</label>
+        <label><input type="radio" name="q23" value="0.63-A-Pessoas" required> A. Rotatividade alta, muitos colaboradores saem frequentemente.</label>
         <label><input type="radio" name="q23" value="1.25-B-Pessoas"> B. Rotatividade moderada, mas precisa melhorar.</label>
         <label><input type="radio" name="q23" value="1.88-C-Pessoas"> C. Rotatividade baixa.</label>
         <label><input type="radio" name="q23" value="2.5-D-Pessoas"> D. Equipe estável, com pouca ou nenhuma rotatividade.</label>
       </div>
       <div class="question">
         <h2>Questão 24</h2>
-        <p>Qual é o processo de integração de novos colaboradores? Como é a jornada deles ao chegar na empresa?</p>
-        <label><input type="radio" name="q24" value="0.63-A-Pessoas" required> A. Não tenho um processo de integração.</label>
-        <label><input type="radio" name="q24" value="1.25-B-Pessoas"> B. Outro colaborador ensina nos primeiros dias.</label>
+        <p>Qual é o processo de integração de novos colaboradores? Como é a jornada deles ao ingressar na empresa?</p>
+        <label><input type="radio" name="q24" value="0.63-A-Pessoas" required> A. Não possuo um processo de integração.</label>
+        <label><input type="radio" name="q24" value="1.25-B-Pessoas"> B. Outro colaborador auxilia nos primeiros dias.</label>
         <label><input type="radio" name="q24" value="1.88-C-Pessoas"> C. Apresento regras e acompanho o início.</label>
-        <label><input type="radio" name="q24" value="2.5-D-Pessoas"> D. Tenho um processo formal de integração com treinamento.</label>
+        <label><input type="radio" name="q24" value="2.5-D-Pessoas"> D. Tenho um processo formal com treinamento para novos colaboradores.</label>
       </div>
       <br><br>
-      <button type="submit" style="position: absolute; bottom: 20px; right: 20px;">Enviar</button>
+      <!-- Botão de Envio do Questionário -->
+      <div class="button-container" style="justify-content: flex-end;">
+        <button type="submit" class="submit-btn">Enviar</button>
+      </div>
     </form>
   </div>
     
-  <!-- Container 3: Resultados -->
+  <!-- Container 3: Relatório de Resultados -->
   <div class="container" id="resultContainer">
-    <!-- Cabeçalho do relatório -->
     <div id="resultHeader">
       <h1 class="report-title">RELATÓRIO DE AVALIAÇÃO DDR</h1>
-      <!-- Dados do usuário serão inseridos via JavaScript -->
+      <!-- Os dados do usuário serão inseridos via JavaScript -->
     </div>
     <h1>PONTUAÇÃO GERAL</h1>
     <div id="totalScoreContainer" class="total-score-box">
@@ -676,13 +686,13 @@
         event.preventDefault();
       } else {
         event.preventDefault(); // Evita o envio real do formulário
-        // Se todos os campos estiverem válidos, oculta a tela de identificação e exibe o questionário
+        // Exibe o questionário e oculta a tela de identificação
         document.getElementById('homeContainer').style.display = 'none';
         document.getElementById('quizContainer').style.display = 'block';
       }
     });
   
-    /* --- Processamento do Quiz e Geração do Relatório de Resultados --- */
+    /* --- Processamento do Quiz e Geração do Relatório --- */
     const pilarColors = {
       "Estratégia": "rgba(255, 99, 132, 0.8)",
       "Processos": "rgba(54, 162, 235, 0.8)",
@@ -695,7 +705,7 @@
     document.getElementById('quizForm').addEventListener('submit', function(e) {
       e.preventDefault();
       
-      // --- Criação do Cabeçalho com Dados do Usuário ---  
+      // Criação do cabeçalho com os dados do usuário
       const resultHeader = document.getElementById('resultHeader');
       resultHeader.querySelectorAll('.user-header').forEach(el => el.remove());
       
@@ -712,7 +722,7 @@
                              '<p>EMAIL: ' + userEmail + '</p>';
       resultHeader.appendChild(userHeader);
   
-      // Processamento das respostas do quiz
+      // Processamento das respostas
       const scoresByPilar = {
         "Estratégia": [],
         "Processos": [],
@@ -738,7 +748,7 @@
       document.getElementById('totalScore').innerText = Math.round(totalScore);
       
       // Ajuste das margens semafóricas:
-      // < 36: vermelho, entre 36 e <48: amarelo, >=48: verde
+      // < 36: vermelho; 36 <= pontuação < 48: amarelo; >= 48: verde
       let bgColor;
       if (totalScore < 36) {
           bgColor = "red";
@@ -781,9 +791,7 @@
         options: {
           indexAxis: 'y',
           elements: {
-            bar: {
-              borderRadius: 10
-            }
+            bar: { borderRadius: 10 }
           },
           scales: {
             x: {
@@ -932,23 +940,23 @@
     const diagnosticData = {
       "Pessoas": {
         1: {
-          diagnosis: "As práticas de gestão de pessoas podem não estar estruturadas, dificultando comunicação e retenção da equipe.",
-          prescription: "Realize reuniões regulares e crie um processo simples de integração para novos colaboradores."
+          diagnosis: "Gestão de pessoas pouco estruturada, dificultando a comunicação e a retenção.",
+          prescription: "Realize reuniões regulares e implemente um processo simples de integração."
         },
         2: {
-          diagnosis: "Algumas práticas já são aplicadas, mas de forma inconsistente, com desafios na rotatividade.",
-          prescription: "Crie um plano estruturado para gestão de pessoas, com feedbacks regulares e revisão dos processos de retenção."
+          diagnosis: "Práticas de gestão aplicadas de forma inconsistente, com desafios na rotatividade.",
+          prescription: "Estruture um plano de gestão de pessoas com feedbacks regulares e revisão dos processos de retenção."
         },
         3: {
-          diagnosis: "A equipe apresenta bom desempenho, mas há oportunidades para melhorar a comunicação e o desenvolvimento.",
-          prescription: "Implemente planos de desenvolvimento individual e ajuste os processos de integração."
+          diagnosis: "Boa performance da equipe, mas com oportunidades para melhorar a comunicação e o desenvolvimento.",
+          prescription: "Implemente planos de desenvolvimento individual e ajustes no processo de integração."
         },
         4: {
-          diagnosis: "A equipe está bem alinhada e engajada, com boas práticas já implementadas.",
+          diagnosis: "Equipe bem alinhada e engajada, com boas práticas implementadas.",
           prescription: "Invista no fortalecimento da cultura organizacional e no desenvolvimento de lideranças internas."
         },
         5: {
-          diagnosis: "A gestão de pessoas está altamente estruturada, contribuindo para alta performance.",
+          diagnosis: "Gestão de pessoas altamente estruturada, contribuindo para alta performance.",
           prescription: "Foque em inovação, programas de capacitação e planos de sucessão para manter o engajamento."
         }
       },
@@ -966,7 +974,7 @@
           prescription: "Refine a estratégia de diferenciação e alinhe campanhas de marketing e vendas."
         },
         4: {
-          diagnosis: "Estratégias bem estruturadas e alinhadas, mas com potencial para maior previsibilidade.",
+          diagnosis: "Estratégias bem estruturadas, com potencial para maior previsibilidade.",
           prescription: "Explore novas oportunidades de expansão e fortaleça a fidelização de clientes."
         },
         5: {
@@ -992,7 +1000,7 @@
           prescription: "Invista em automação financeira e análise preditiva para otimizar investimentos."
         },
         5: {
-          diagnosis: "Gestão financeira consolidada e com decisões baseadas em dados.",
+          diagnosis: "Gestão financeira consolidada, com decisões baseadas em dados.",
           prescription: "Explore novas estratégias de otimização de custos e diversifique as fontes de receita."
         }
       },
@@ -1007,7 +1015,7 @@
         },
         3: {
           diagnosis: "Marketing com impacto, porém com inconsistências na frequência.",
-          prescription: "Implemente processos de análise de resultados e ajuste as campanhas periodicamente."
+          prescription: "Implemente processos de análise dos resultados e ajuste as campanhas periodicamente."
         },
         4: {
           diagnosis: "Campanhas bem planejadas e com resultados positivos.",
@@ -1054,11 +1062,11 @@
           prescription: "Implemente treinamentos e ajuste os controles operacionais para maior previsibilidade."
         },
         4: {
-          diagnosis: "Gestão de processos bem organizada e com controle digital do estoque.",
+          diagnosis: "Gestão de processos bem organizada, com controle digital do estoque.",
           prescription: "Explore automação e melhoria contínua para otimizar a produtividade."
         },
         5: {
-          diagnosis: "Processos altamente eficientes, com operação coordenada e controle de estoque rigoroso.",
+          diagnosis: "Processos altamente eficientes, com operação coordenada e controle rigoroso do estoque.",
           prescription: "Busque inovações tecnológicas e capacite a equipe para manter o alto padrão operacional."
         }
       }
