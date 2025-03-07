@@ -127,7 +127,7 @@
       overflow-x: auto;
     }
     table, th, td {
-      border: 1px solid #ddd;
+      border: none;
     }
     th, td {
       padding: 8px;
@@ -197,6 +197,13 @@
       font-weight: bold;
       margin: 20px 0;
       color: #fff;
+      display: flex;
+      justify-content: space-between;
+      width: 100%;
+    }
+    .total-score-box td {
+      width: 50%;
+      padding: 20px;
     }
     .total-score-legend {
       font-size: 12px;
@@ -310,7 +317,7 @@
       text-transform: uppercase;
       font-weight: bold;
     }
-    
+
     /* CSS para Impressão */
     @media print {
       body * {
@@ -319,6 +326,7 @@
       #resultContainer, #resultContainer * {
         visibility: visible;
       }
+
       #resultContainer {
         position: absolute;
         left: 0;
@@ -492,7 +500,7 @@
       </div>
       <div class="question">
         <h2>Questão 12</h2>
-        <p>Você utiliza técnicas de upsell (oferecer itens de maior valor) e cross-sell (sugerir itens complementares) no seu restaurante?</p>
+        <p>Você utiliza técnicas de upsell (oferecer itens de maior valor) e cross-sell (sugerir itens complementares) no seu restaurante?</p>
         <label><input type="radio" name="q12" value="0.63-A-Vendas" required> A. Nunca utilizo essas técnicas.</label>
         <label><input type="radio" name="q12" value="1.25-B-Vendas"> B. Conheço, mas raramente as aplico.</label>
         <label><input type="radio" name="q12" value="1.88-C-Vendas"> C. Uso ocasionalmente, sem regularidade.</label>
@@ -509,7 +517,7 @@
       </div>
       <div class="question">
         <h2>Questão 14</h2>
-        <p>Você já utiliza tráfego pago em suas estratégias de marketing?</p>
+        <p>Você já utilizou tráfego pago em suas estratégias de marketing?</p>
         <label><input type="radio" name="q14" value="0.63-A-Marketing" required> A. Nunca utilizei tráfego pago.</label>
         <label><input type="radio" name="q14" value="1.25-B-Marketing"> B. Testei tráfego pago, mas não obtive os resultados esperados.</label>
         <label><input type="radio" name="q14" value="1.88-C-Marketing"> C. Uso tráfego pago ocasionalmente, ainda ajustando a estratégia.</label>
@@ -554,21 +562,21 @@
         <label><input type="radio" name="q19" value="0.63-A-Finanças" required> A. Não tenho um sistema de controle financeiro e as decisões são feitas de forma intuitiva.</label>
         <label><input type="radio" name="q19" value="1.25-B-Finanças"> B. Faço o controle do fluxo de caixa, mas ainda não utilizo relatórios detalhados.</label>
         <label><input type="radio" name="q19" value="1.88-C-Finanças"> C. Faço o controle financeiro, mas ainda sem usar ferramentas formais, como DRE e fluxo de caixa. </label>
-        <label><input type="radio" name="q19" value="2.5-D-Finanças"> D. Utilizo o fluxo de caixa e DRE regularmente e tomo decisões baseadas em dados financeiros.</label>
+        <label><input type="radio" name="q19" value="2.5-D-Finanças"> D. Utilizo o fluxo de caixa e DRE regularmente e tomo decisões baseadas em dados financeiros.</label>
       </div>
       <div class="question">
         <h2>Questão 20</h2>
-        <p>Como você precifica os produtos/serviços no restaurante?</p>
+        <p>Como você acompanha a saúde financeira do seu restaurante?</p>
         <label><input type="radio" name="q20" value="0.63-A-Finanças" required> A. Baseio os preços apenas nos custos diretos (matéria-prima).</label>
         <label><input type="radio" name="q20" value="1.25-B-Finanças"> B. Defino os preços de forma intuitiva, sem um cálculo detalhado.</label>
         <label><input type="radio" name="q20" value="1.88-C-Finanças"> C. Considero os custos e aplico uma margem de lucro, mas sem analisar o mercado.</label>
-        <label><input type="radio" name="q20" value="2.5-D-Finanças"> D. Realizo uma análise completa, levando em conta custos, margem de lucro e análise de mercado/concorrência.</label>
+        <label><input type="radio" name="q20" value="2.5-D-Finanças"> D. Não realizo uma análise completa, levando em conta custos, margem de lucro e análise de mercado/concorrência.</label>
       </div>
       <!-- Pessoas (Questões 21 a 24) -->
       <div class="question">
         <h2>Questão 21</h2>
         <p>Como está a gestão de pessoas no seu restaurante?</p>
-        <label><input type="radio" name="q21" value="0.63-A-Pessoas" required> A. Não faço reuniões com a equipe.</label>
+        <label><input type="radio" name="q21" value="0.63-A-Pessoas" required> A. Não faço reuniões com a equipe.</label>
         <label><input type="radio" name="q21" value="1.25-B-Pessoas"> B. Faço reuniões esporádicas.</label>
         <label><input type="radio" name="q21" value="1.88-C-Pessoas"> C. Faço reuniões regulares, mas nem sempre abordo todos os temas.</label>
         <label><input type="radio" name="q21" value="2.5-D-Pessoas"> D. Faço reuniões periódicas para discutir gestão e desempenho.</label>
@@ -604,19 +612,52 @@
       </div>
     </form>
   </div>
-    
+
   <!-- Container 3: Relatório de Resultados -->
   <div class="container" id="resultContainer">
     <div id="resultHeader">
       <h1 class="report-title">RELATÓRIO DE AVALIAÇÃO DDR</h1>
       <!-- Os dados do usuário serão inseridos via JavaScript -->
     </div>
+
+
     <h1>PONTUAÇÃO GERAL</h1>
-    <div id="totalScoreContainer" class="total-score-box">
-      <span id="totalScore"></span>
-    </div>
+<table class="total-score-box">
+  <tr>
+    <td id="totalScore" class="score-column"></td>
+    <td id="feedback" class="feedback-column"></td>
+  </tr>
+</table>
+
+<style>
+  .total-score-box {
+    width: 100%; /* Garante que a tabela ocupa toda a largura disponível */
+    border-collapse: collapse; /* Remove espaços extras entre células */
+  }
+
+  .total-score-box td {
+    padding: 10px; /* Adiciona espaçamento interno para melhor visualização */
+  }
+
+  /* Coluna 1 (Pontuação) - Centralizada */
+  .score-column {
+    text-align: center; /* Centraliza o conteúdo */
+    width: 20%; /* Define um tamanho adequado para a pontuação */
+    font-weight: bold; /* Destaca a pontuação */
+  }
+
+  /* Coluna 2 (Feedback) - Alinhada à esquerda */
+  .feedback-column {
+    text-align: left; /* Alinha o conteúdo à esquerda */
+    width: 80%; /* Permite que o feedback ocupe mais espaço */
+  }
+</style>
+
+
+
+
     <p class="total-score-legend" style="font-style: italic; color: gray;">
-      OBS: o máximo da pontuação é 60, composta pela soma das pontuações de cada pilar: Estratégia, Processos, Vendas, Marketing, Finanças, Pessoas.
+      OBS: o máximo da pontuação é 100, resultante das pontuações dos pilares: Estratégia, Processos, Vendas, Marketing, Finanças, Pessoas.
     </p>
     <h1>DESEMPENHO POR PILAR DE GESTÃO</h1>
     <canvas id="chartCanvas"></canvas>
@@ -631,7 +672,7 @@
     /* --- Validação e Transição do Formulário de Identificação --- */
     const form = document.getElementById('identification-form');
     const inputs = form.querySelectorAll('input');
-  
+
     function validateField(input) {
       const pattern = input.getAttribute('pattern');
       if (pattern) {
@@ -642,7 +683,7 @@
       }
       return true;
     }
-  
+
     inputs.forEach(input => {
       input.addEventListener('blur', function() {
         if (!validateField(input)) {
@@ -659,7 +700,7 @@
           }
         }
       });
-  
+
       input.addEventListener('input', function() {
         if (validateField(input)) {
           input.classList.remove('input-error');
@@ -670,7 +711,7 @@
         }
       });
     });
-  
+
     form.addEventListener('submit', function(event) {
       let isValid = true;
       inputs.forEach(input => {
@@ -692,7 +733,7 @@
         document.getElementById('quizContainer').style.display = 'block';
       }
     });
-  
+
     /* --- Processamento do Quiz e Geração do Relatório --- */
     const pilarColors = {
       "Estratégia": "rgba(255, 99, 132, 0.8)",
@@ -702,19 +743,19 @@
       "Finanças": "rgba(153, 102, 255, 0.8)",
       "Pessoas": "rgba(255, 159, 64, 0.8)"
     };
-  
+
     document.getElementById('quizForm').addEventListener('submit', function(e) {
       e.preventDefault();
-      
+
       // Criação do cabeçalho com os dados do usuário
       const resultHeader = document.getElementById('resultHeader');
       resultHeader.querySelectorAll('.user-header').forEach(el => el.remove());
-      
+
       const userName = document.getElementById('nome').value.toUpperCase();
       const userRest = document.getElementById('restaurante').value.toUpperCase();
       const userTel = document.getElementById('telefone').value.toUpperCase();
       const userEmail = document.getElementById('email').value.toUpperCase();
-      
+
       const userHeader = document.createElement('div');
       userHeader.className = 'user-header';
       userHeader.innerHTML = '<p>NOME: ' + userName + '</p>' +
@@ -722,7 +763,7 @@
                              '<p>TELEFONE: ' + userTel + '</p>' +
                              '<p>EMAIL: ' + userEmail + '</p>';
       resultHeader.appendChild(userHeader);
-  
+
       // Processamento das respostas
       const scoresByPilar = {
         "Estratégia": [],
@@ -735,7 +776,7 @@
       const swotScores = {};
       const formData = new FormData(e.target);
       let totalScore = 0;
-      
+
       formData.forEach((value, key) => {
         const [score, answer, pillar] = value.split('-');
         const numericScore = parseFloat(score);
@@ -745,32 +786,87 @@
           scoresByPilar[pillar].push(numericScore);
         }
       });
-      
+
+      // Conversão da pontuação total para uma escala de 0 a 100
+      totalScore = (totalScore / 60) * 100;
       document.getElementById('totalScore').innerText = Math.round(totalScore);
-      
-      // Ajuste das margens semafóricas:
-      // < 36: vermelho; 36 <= pontuação < 48: amarelo; >= 48: verde
-      let bgColor;
-      if (totalScore < 36) {
-          bgColor = "red";
-      } else if (totalScore < 48) {
-          bgColor = "yellow";
-      } else {
-          bgColor = "green";
-      }
-      document.getElementById('totalScoreContainer').style.backgroundColor = bgColor;
-      document.getElementById('totalScoreContainer').style.color = (bgColor === "yellow" ? "black" : "white");
-      
+
+
+
+
+
+
+
+
+
+
+    // Ajuste das margens semafóricas:
+// < 37.6: vermelho; 37.6 <= pontuação < 62.6: amarelo; 62.6 <= pontuação < 81.4: laranja; 81.4 <= pontuação < 100: azul; >= 100: verde
+let bgColor;
+let textColor;
+let feedbackText = "";
+
+if (totalScore < 37.6) {
+    bgColor = "red";
+    textColor = "white"; // Contraste adequado para fundo vermelho
+    feedbackText = "Nível Crítico: seu restaurante pode estar em um momento delicado, com falhas estruturais e riscos financeiros elevados. 🚨 O foco agora deve ser corrigir os problemas mais críticos e estabelecer processos essenciais para garantir a estabilidade do negócio. Sugestão: Fazer um diagnóstico detalhado, definir metas mínimas e implantar controles financeiros básicos podem ser passos decisivos. Se você quer uma solução clara e direta para estruturar sua gestão e sair do risco, a Donos de Restaurantes tem um método testado que já ajudou milhares de empresários! Não perca tempo, conheça agora e aplique no seu restaurante!";
+} else if (totalScore < 62.6) {
+    bgColor = "yellow";
+    textColor = "black"; // Melhor contraste para fundo amarelo
+    feedbackText = "Nível de Atenção: seu restaurante está evoluindo, mas ainda há instabilidades que podem comprometer o crescimento. 📉 Pequenos ajustes agora podem evitar grandes problemas no futuro e garantir um crescimento mais estruturado. Sugestão: Melhorar os processos operacionais, definir métricas de controle financeiro e planejar o médio prazo são passos essenciais. Quer ter clareza e segurança na sua gestão? A Donos de Restaurantes pode te guiar com um método validado que transforma negócios de forma prática e eficiente. Inscreva-se agora e acelere seu crescimento!";
+} else if (totalScore < 81.4) {
+    bgColor = "orange";
+    textColor = "black"; // Melhor contraste para fundo laranja
+    feedbackText = "Nível Mediano: seu restaurante já está operando de forma funcional, mas ainda há desperdícios e falhas que podem afetar o crescimento. ⚠️ A hora é agora para otimizar a operação e melhorar a rentabilidade. Sugestão: Refinar o controle financeiro, ajustar precificação e capacitar sua equipe podem trazer ganhos expressivos. Se você quer acelerar seus lucros e eliminar desperdícios, a Donos de Restaurantes tem as estratégias certas para você! Descubra como aplicar no seu restaurante hoje mesmo!";
+} else if (totalScore < 100) {
+    bgColor = "blue";
+    textColor = "white"; // Melhor contraste para fundo azul
+    feedbackText = "Nível Avançado: seu restaurante está em um bom caminho, mas há oportunidades para crescer ainda mais e aumentar sua lucratividade. ✅ Pequenos ajustes agora podem fazer uma grande diferença no faturamento e na experiência do cliente. Sugestão: Expandir estratégias de marketing, automatizar processos e planejar a escalabilidade do negócio são ações estratégicas. Se você quer transformar um bom restaurante em uma referência no mercado, a Donos de Restaurantes tem um plano estruturado para te levar até lá! Conheça as estratégias que já levaram centenas de negócios ao sucesso!";
+} else {
+    bgColor = "green";
+    textColor = "white"; // Melhor contraste para fundo verde
+    feedbackText = "Nível de Excelência: seu restaurante já atingiu um alto nível de excelência, e agora é o momento de pensar grande! 🏆 Expansão, inovação e fortalecimento da marca podem levar seu negócio a outro patamar. Sugestão: Avaliar novas unidades, investir em diferenciação e criar uma cultura organizacional forte podem consolidar seu restaurante no mercado. Se seu objetivo é escalar e transformar sua operação em um grande negócio, a Donos de Restaurantes pode te mostrar como crescer com segurança e previsibilidade! Não perca essa oportunidade e descubra como dar o próximo passo agora!";
+}
+
+// Aplicação do estilo no elemento de feedback
+const feedbackElement = document.getElementById('feedback');
+if (feedbackElement) {
+    feedbackElement.style.fontSize = "12px"; // Define o tamanho do texto como 12px
+    feedbackElement.style.lineHeight = "1.5"; // Ajuste para melhor legibilidade
+    feedbackElement.style.color = textColor; // Aplica a cor do texto com contraste adequado
+}
+
+// Aplicação da cor de fundo e cor do texto na caixa de pontuação
+const scoreBox = document.querySelector('.total-score-box');
+if (scoreBox) {
+    scoreBox.style.backgroundColor = bgColor;
+    scoreBox.style.color = textColor; // Garante contraste adequado no score box
+}
+
+// Atualiza o conteúdo do feedback
+if (feedbackElement) {
+    feedbackElement.textContent = feedbackText;
+}
+
+
+
+
+
+
+
+
+
+
       document.getElementById('quizContainer').style.display = 'none';
       document.getElementById('resultContainer').style.display = 'block';
-      
+
       const pilarLabels = Object.keys(scoresByPilar);
       const pilarScores = {};
       pilarLabels.forEach(pilar => {
         const sum = scoresByPilar[pilar].reduce((a, b) => a + b, 0);
         pilarScores[pilar] = sum;
       });
-      
+
       const ctx = document.getElementById('chartCanvas').getContext('2d');
       new Chart(ctx, {
         type: 'bar',
@@ -820,7 +916,7 @@
         },
         plugins: [ChartDataLabels]
       });
-      
+
       const swotMapping = {
         "q1": "Planejamento Estratégico",
         "q2": "Diretrizes Estratégicas",
@@ -847,7 +943,7 @@
         "q23": "Rotatividade de Colaboradores",
         "q24": "Integração de Colaboradores"
       };
-      
+
       let swot = { pontosFortes: [], pontosAtencao: [] };
       for (let q in swotMapping) {
         if (swotScores[q] !== undefined) {
@@ -858,18 +954,18 @@
           }
         }
       }
-      
+
       let swotContainer = document.createElement('div');
       swotContainer.className = "swot-container page-break";
-      
+
       let pontosFortesDiv = document.createElement('div');
       pontosFortesDiv.className = "quadrant pontos-fortes";
       pontosFortesDiv.innerHTML = "<h2>PONTOS FORTES</h2><ul></ul>";
-      
+
       let pontosAtencaoDiv = document.createElement('div');
       pontosAtencaoDiv.className = "quadrant pontos-atencao";
       pontosAtencaoDiv.innerHTML = "<h2>PONTOS DE ATENÇÃO</h2><ul></ul>";
-      
+
       swot.pontosFortes.forEach(item => {
         let li = document.createElement('li');
         li.textContent = item;
@@ -883,7 +979,7 @@
       swotContainer.appendChild(pontosFortesDiv);
       swotContainer.appendChild(pontosAtencaoDiv);
       document.getElementById('resultContainer').insertBefore(swotContainer, document.getElementById('resultContainer').querySelector('.button-container'));
-      
+
       let acoesDiv = document.createElement('div');
       acoesDiv.className = "acoes-container";
       let acoesTitle = document.createElement('h2');
@@ -898,20 +994,20 @@
                           </tr>`;
       acoesTable.appendChild(thead);
       let tbody = document.createElement('tbody');
-      
+
       pilarLabels.forEach(pilar => {
         const sum = scoresByPilar[pilar].reduce((a, b) => a + b, 0);
         let level;
         if(sum === 10) { level = 5; }
-        else if(sum <= 3.76) { level = 1; }
-        else if(sum > 3.76 && sum < 6.26) { level = 2; }
-        else if(sum >= 6.26 && sum < 8.14) { level = 3; }
-        else if(sum >= 8.14 && sum < 10) { level = 4; }
-        
+        else if(sum <= 37.6) { level = 1; }
+        else if(sum > 37.6 && sum < 62.6) { level = 2; }
+        else if(sum >= 62.6 && sum < 81.4) { level = 3; }
+        else if(sum >= 81.4 && sum < 100) { level = 4; }
+
         let prescText = (diagnosticData[pilar] && diagnosticData[pilar][level] && diagnosticData[pilar][level].prescription)
                           ? diagnosticData[pilar][level].prescription
                           : "Sem dados.";
-        
+
         let row = document.createElement('tr');
         let cell1 = document.createElement('td');
         cell1.style.fontWeight = 'bold';
@@ -928,16 +1024,16 @@
       acoesDiv.appendChild(acoesTable);
       document.getElementById('resultContainer').insertBefore(acoesDiv, document.getElementById('resultContainer').querySelector('.button-container'));
     });
-    
+
     document.getElementById('backButton').addEventListener('click', function() {
       document.getElementById('resultContainer').style.display = 'none';
       document.getElementById('quizContainer').style.display = 'block';
     });
-    
+
     document.getElementById('generatePdf').addEventListener('click', function() {
       window.print();
     });
-    
+
     const diagnosticData = {
       "Pessoas": {
         1: {
@@ -968,7 +1064,7 @@
         },
         2: {
           diagnosis: "Estratégias definidas, mas sem revisões consistentes.",
-          prescription: "Reveja e ajuste o planejamento regularmente, consolidando missão, visão e valores."
+          prescription: "Revise e ajuste o planejamento regularmente, consolidando missão, visão e valores."
         },
         3: {
           diagnosis: "Planejamento estruturado, porém com poucos ajustes diante de mudanças.",
